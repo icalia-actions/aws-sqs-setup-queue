@@ -28,7 +28,7 @@ if (!region)
     region = process.env.AWS_DEFAULT_REGION;
 const client = new sqs_1.default({
     region,
-    customUserAgent: "icalia-actions/aws-action"
+    customUserAgent: 'icalia-actions/aws-action'
 });
 function getQueueUrl(queueName) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -37,7 +37,7 @@ function getQueueUrl(queueName) {
             return result.QueueUrl;
         }
         catch (err) {
-            if (err.code === "AWS.SimpleQueueService.NonExistentQueue") {
+            if (err.code === 'AWS.SimpleQueueService.NonExistentQueue') {
                 return;
             }
             throw err;
@@ -48,7 +48,9 @@ function setupQueueTags(queueUrl, tags) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!tags)
             return;
-        const result = yield client.tagQueue({ QueueUrl: queueUrl, Tags: tags }).promise();
+        const result = yield client
+            .tagQueue({ QueueUrl: queueUrl, Tags: tags })
+            .promise();
         (0, core_1.info)(`Tags set for queue ${queueUrl}`);
     });
 }
@@ -56,14 +58,16 @@ function setupQueueAttributes(queueUrl, attributes) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!attributes)
             return;
-        const result = yield client.setQueueAttributes({ QueueUrl: queueUrl, Attributes: attributes }).promise();
+        const result = yield client
+            .setQueueAttributes({ QueueUrl: queueUrl, Attributes: attributes })
+            .promise();
         (0, core_1.info)(`Attributes set for queue ${queueUrl}`);
     });
 }
 function parseInput() {
-    const tags = (0, core_1.getInput)("tags");
-    const attributes = (0, core_1.getInput)("attributes");
-    const queueName = (0, core_1.getInput)("queue-name", { required: true });
+    const tags = (0, core_1.getInput)('tags');
+    const attributes = (0, core_1.getInput)('attributes');
+    const queueName = (0, core_1.getInput)('queue-name', { required: true });
     return {
         QueueName: queueName,
         tags: tags ? JSON.parse(tags) : undefined,
@@ -73,7 +77,7 @@ function parseInput() {
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         const request = parseInput();
-        console.log("request:", request);
+        console.log('request:', request);
         let queueUrl = yield getQueueUrl(request.QueueName);
         if (queueUrl) {
             yield setupQueueTags(queueUrl, request.tags);
@@ -83,7 +87,7 @@ function run() {
             const result = yield client.createQueue(request).promise();
             queueUrl = result.QueueUrl;
         }
-        (0, core_1.setOutput)("queue-url", queueUrl);
+        (0, core_1.setOutput)('queue-url', queueUrl);
         return 0;
     });
 }
