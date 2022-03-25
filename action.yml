@@ -1,0 +1,25 @@
+name: AWS SQS Create Queue
+description: Provide a description here
+
+author: Icalia Labs
+
+branding:
+  icon: activity
+  color: red
+
+inputs:
+  queue-name:
+    required: true
+    description: The name of the new queue.
+  
+  attributes:
+    required: false
+    description: A map of attributes with their corresponding values.
+
+  tags:
+    required: false
+    description: Tags...
+
+runs:
+  using: node16
+  main: dist/index.js
