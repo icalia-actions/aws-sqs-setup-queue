@@ -9,7 +9,7 @@ Creates or updates a SQS queue
         uses: aws-actions/configure-aws-credentials@v1.6.1
 
       - name: Setup AWS SQS Queue
-        uses: icalia-actions/aws-sqs-setup-queue@v0.0.2
+        uses: icalia-actions/aws-sqs-setup-queue@v0.0.3
         with:
           queue-name: my-queue
           

@@ -1,6 +1,6 @@
 {
   "name": "@icalialabs/aws-sqs-setup-queue",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "Manages (create, delete, etc) SQS queues",
   "main": "lib/main.js",
