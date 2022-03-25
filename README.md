@@ -8,7 +8,7 @@ Creates or updates a SQS queue
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1.6.1
 
-      - name: Deploy AWS ECS Service
+      - name: Setup AWS SQS Queue
         uses: icalia-actions/aws-sqs-setup-queue@v0.0.1
         with:
           queue-name: my-queue
