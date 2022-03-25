@@ -20,6 +20,10 @@ inputs:
     required: false
     description: Tags...
 
+outputs:
+  queue-url:
+    description: The URL of the created or updated queue
+
 runs:
   using: node16
   main: dist/index.js
