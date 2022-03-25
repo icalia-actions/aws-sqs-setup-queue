@@ -9,7 +9,7 @@ Creates or updates a SQS queue
         uses: aws-actions/configure-aws-credentials@v1.6.1
 
       - name: Setup AWS SQS Queue
-        uses: icalia-actions/aws-sqs-setup-queue@v0.0.1
+        uses: icalia-actions/aws-sqs-setup-queue@v0.0.2
         with:
           queue-name: my-queue
           
@@ -19,7 +19,6 @@ Creates or updates a SQS queue
             {
               "DelaySeconds":"10"
             }
-
           
           # You can optionally specify the queue tags, which will update
           # the queue if it already exists, or create the queue with them:
