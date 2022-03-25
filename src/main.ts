@@ -62,19 +62,20 @@ function parseInput(): CreateQueueRequest {
 }
 
 export async function run() {
+  info(`Parsing input...`)
   const request = parseInput()
-
-  console.log('request:', request)
 
   let queueUrl = await getQueueUrl(request.QueueName)
   if (queueUrl) {
+    info(`Queue "${request.QueueName}" already exists...`)
     await setupQueueTags(queueUrl, request.tags)
     await setupQueueAttributes(queueUrl, request.Attributes)
   } else {
     const result = await client.createQueue(request).promise()
+    info(`Queue "${request.QueueName}" created successfully.`)
     queueUrl = result.QueueUrl
   }
-
+  info(`Queue "${request.QueueName}" configured successfully`)
   setOutput('queue-url', queueUrl)
 
   return 0

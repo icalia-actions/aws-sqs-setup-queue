@@ -76,17 +76,20 @@ function parseInput() {
 }
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
+        (0, core_1.info)(`Parsing input...`);
         const request = parseInput();
-        console.log('request:', request);
         let queueUrl = yield getQueueUrl(request.QueueName);
         if (queueUrl) {
+            (0, core_1.info)(`Queue "${request.QueueName}" already exists...`);
             yield setupQueueTags(queueUrl, request.tags);
             yield setupQueueAttributes(queueUrl, request.Attributes);
         }
         else {
             const result = yield client.createQueue(request).promise();
+            (0, core_1.info)(`Queue "${request.QueueName}" created successfully.`);
             queueUrl = result.QueueUrl;
         }
+        (0, core_1.info)(`Queue "${request.QueueName}" configured successfully`);
         (0, core_1.setOutput)('queue-url', queueUrl);
         return 0;
     });
